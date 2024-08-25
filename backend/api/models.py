@@ -9,11 +9,11 @@ class Task(models.Model):
         ('in_progress', 'In Progress'),
         ('done', 'Done'),
     )
-    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     due_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='todo')
-    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
+    assigned = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
 
     def __str__(self):
         return self.name
