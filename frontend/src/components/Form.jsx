@@ -8,7 +8,6 @@ function Form({ route, method }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState("");
-
   const navigate = useNavigate();
 
   const name = method === "login" ? "Login" : "Register";
