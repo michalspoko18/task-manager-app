@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Task.scss"
 
 function Task({ task, onDelete }) {
     

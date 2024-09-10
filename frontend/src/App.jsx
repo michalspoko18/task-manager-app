@@ -2,13 +2,17 @@ import React from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/login"
 import Register from "./pages/register"
-import Home from "./pages/home"
+import TaskManager from "./pages/TaskManager"
 import NotFound from "./pages/404"
 import ProtectedRoute from "./components/ProtectedRoute"
+import Home from "./pages/home"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Logout() {
   localStorage.clear()
-  return <Navigate to="/login" />
+  return <Navigate to="/" />
 }
 
 function RegisterAndLogout() {
@@ -19,12 +23,14 @@ function RegisterAndLogout() {
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route
-          path="/"
+          path="/taskmanager"
           element={
             <ProtectedRoute>
-              <Home />
+              <TaskManager />
             </ProtectedRoute>
           }
         />
@@ -33,6 +39,7 @@ function App() {
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
