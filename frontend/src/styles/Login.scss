@@ -1,0 +1,25 @@
+.b-login {
+    background-color: #232234 !important;
+    border: 0 !important;
+    height: 100vh;
+    max-height: 300vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__inner {
+        display: flex;
+        width: 370px;
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+        border-radius: 20px;
+        background-color: #302F48;
+        box-shadow: 0 0 25px 0 rgba(255, 255, 255, 0.1);
+        align-items: center;
+    }
+
+    &__image {
+        width: 100px;
+    }
+}

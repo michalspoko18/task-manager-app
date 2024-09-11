@@ -1,8 +1,12 @@
 import React from "react";
 import "../styles/Home.scss";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Home() {
   return (
+    <div className="b-home">
+    <Header />
     <div className="b-home-choose">
       <div className="space"></div>
       <div className="container">
@@ -20,6 +24,8 @@ function Home() {
           </div>
         </div>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 }

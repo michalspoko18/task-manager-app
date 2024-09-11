@@ -1,7 +1,7 @@
 import React from "react"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import Login from "./pages/login"
-import Register from "./pages/register"
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 import TaskManager from "./pages/TaskManager"
 import NotFound from "./pages/404"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -20,10 +20,14 @@ function RegisterAndLogout() {
   return <Register />
 }
 
+function isPageLogin() {
+  const location = useLocation();
+  const isLoginPage = location.pathname.includes('login');
+}
+
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -36,10 +40,9 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/register" element={<RegisterAndLogout />} />
+        {/* <Route path="/register" element={<RegisterAndLogout />} /> */}
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
-      <Footer />
     </BrowserRouter>
   )
 }
