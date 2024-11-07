@@ -9,6 +9,7 @@ import Home from "./pages/home"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import "bootstrap/dist/css/bootstrap.min.css";
+import Konfigurator from "./pages/Konfigurator"
 
 function Logout() {
   localStorage.clear()
@@ -38,9 +39,10 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/konfigurator" element={<Konfigurator />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
-        {/* <Route path="/register" element={<RegisterAndLogout />} /> */}
+        {/* <Route path="/register" element={<RegisterAndLogout />} />  */}
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>

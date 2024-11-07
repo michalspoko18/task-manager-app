@@ -4,29 +4,31 @@ import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Form.scss";
 import { toast } from "sonner";
-
 import {
   TextField,
   Button,
-  FormGroup,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  Divider,
   FormControlLabel,
   Checkbox,
-  Divider,
 } from "@mui/material";
-
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { SnackbarProvider, useSnackbar } from "notistack";
 
 function Form({ route, method }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState("");
   const navigate = useNavigate();
-
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClick = () => {
-    enqueueSnackbar("At this moment not allow!");
+    enqueueSnackbar("At this moment not allowed!");
   };
 
   const name = method === "login" ? "Login" : "Register";
@@ -45,11 +47,14 @@ function Form({ route, method }) {
         navigate("/login");
       }
     } catch (error) {
-      // alert(error);
+      // Handle error properly here
     } finally {
       setLoading(false);
     }
   };
+
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = (event) => event.preventDefault();
 
   return (
     <form onSubmit={handleSubmit} className="b-form__inner">
@@ -59,30 +64,46 @@ function Form({ route, method }) {
         variant="outlined"
         onChange={(e) => setUsername(e.target.value)}
         value={username}
-        color="white"
+        color="secondary"
       />
-      <TextField
-        id="outlined-password-input"
-        label="Password"
-        type="password"
-        autoComplete="current-password"
 
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      {/* Password Input with Toggle Visibility */}
+      <FormControl variant="outlined">
+        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          color="secondary"
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Password"
+        />
+      </FormControl>
+
       <div className="b-form__options">
-        <FormControlLabel control={<Checkbox />} label="Remeber me" sx={{color: "#fff"}}/>
-        <a className="b-form__options--button" type="button" onClick={handleClick}>Forget password?</a>
+        <FormControlLabel control={<Checkbox />} label="Remember me" sx={{ color: "#fff" }} />
+        <a className="b-form__options--button" type="button" onClick={handleClick}>
+          Forget password?
+        </a>
       </div>
+
       <Button variant="outlined" type="submit">
         {name}
       </Button>
 
       <Divider sx={{ color: "white", borderColor: "primary.main" }}>REGISTER</Divider>
-
-      {/* <button className="b-form__button" type="submit ">
-        {name}
-      </button> */}
     </form>
   );
 }
